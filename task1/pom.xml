@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>homework-base</module>
+        <module>homework-saranchin-andrey</module>
     </modules>
 
     <build>

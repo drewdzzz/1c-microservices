@@ -1,9 +1,11 @@
 package ru.mipt1c.homework.tests.task1;
 
+import java.io.Serializable;
+
 /**
  * Класс-ключ, по которому можно однозначно идентифицировать объект типа {@link Student}.
  */
-public class StudentKey implements Comparable<StudentKey> {
+public class StudentKey implements Comparable<StudentKey>, Serializable {
     private final int groupId;
     private final String name;
 

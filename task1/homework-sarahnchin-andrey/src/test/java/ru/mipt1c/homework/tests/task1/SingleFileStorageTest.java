@@ -3,7 +3,7 @@ package ru.mipt1c.homework.tests.task1;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;
-import ru.mipt1c.homework.task1.KeyValueStorage;
+import ru.mipt1c.homework.task1.*;
 
 import java.io.File;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  * Оснастка для функционального тестирования {@link KeyValueStorage}.
  * Для запуска нужно завести конкретный класс-потомок и определить соответствующие фабричные методы.
  */
-public abstract class AbstractSingleFileStorageTest extends KeyValueStorageFactories {
+public class SingleFileStorageTest extends KeyValueStorageFactories {
 
     public static final StudentKey KEY_1 = new StudentKey(591, "Vasya Pukin");
     public static final Student VALUE_1 = new Student(
@@ -236,5 +236,20 @@ public abstract class AbstractSingleFileStorageTest extends KeyValueStorageFacto
     protected final KeyValueStorage<StudentKey, Student> doWithPojo(
             String path, StorageTestUtils.Callback<KeyValueStorage<StudentKey, Student>> callback) throws Exception {
         return storageCallback(path, callback, this::buildPojoStorage);
+    }
+
+    @Override
+    protected KeyValueStorage<String, String> buildStringsStorage(String path) {
+        return new PersistentKeyValueStorage<String, String>(path);
+    }
+
+    @Override
+    protected KeyValueStorage<Integer, Double> buildNumbersStorage(String path) {
+        return new PersistentKeyValueStorage<Integer, Double>(path);
+    }
+
+    @Override
+    protected KeyValueStorage<StudentKey, Student> buildPojoStorage(String path) {
+        return new PersistentKeyValueStorage<StudentKey, Student>(path);
     }
 }
